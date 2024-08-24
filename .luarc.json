@@ -3,7 +3,6 @@
         "/home/milianor/neovim/share/nvim/runtime",
         "${3rd}/luv/library",
         "${3rd}/busted/library",
-        "~/.local/share/nvim/lazy/solarized.nvim",
         "${3rd}/luassert/library"
     ]
 }
