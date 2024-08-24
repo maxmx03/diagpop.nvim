@@ -17,6 +17,9 @@ return {
     limit = 10,
     hl_group = 'NormalFloat',
     border = 'rounded',
+    dependencies = {
+       'nvim-tree/nvim-web-devicons'
+    }
   },
 }
 ```

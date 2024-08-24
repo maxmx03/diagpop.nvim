@@ -1,5 +1,22 @@
 local M = {}
 
+local function isempty(s)
+  return s == nil or s == ''
+end
+
+local function get_filename(full_path)
+  local filename = vim.fn.fnamemodify(full_path, ':t')
+  local extension = vim.fn.expand('%:e')
+
+  if not isempty(filename) then
+    local devicons = require('nvim-web-devicons')
+    local file_icon = devicons.get_icon(filename, extension, { default = true })
+    local navic_text = vim.api.nvim_get_hl(0, { name = 'Normal', link = false })
+    vim.api.nvim_set_hl(0, 'Winbar', { fg = navic_text.fg })
+    return string.format('%s %s', filename, file_icon)
+  end
+end
+
 function M.close_floats(floats)
   for window, bufnr in pairs(floats) do
     if vim.api.nvim_win_is_valid(window) then
@@ -11,7 +28,7 @@ function M.close_floats(floats)
   end
 end
 
-function M.open_floats(diagnostics, opts)
+function M.open_floats(current_buffer, diagnostics, opts)
   local floats = {}
   local bufnr = vim.api.nvim_create_buf(false, true)
   local icons = require('diagpop.icons')
@@ -35,6 +52,10 @@ function M.open_floats(diagnostics, opts)
   local lines = {}
   local max_width = 0
 
+  local buffername = vim.api.nvim_buf_get_name(current_buffer)
+  local filename = get_filename(buffername)
+  table.insert(lines, ' ' .. filename .. ' ')
+
   for _, diagnostic in ipairs(diagnostics) do
     local message = string.format(
       '%s - %s %s',
@@ -49,13 +70,13 @@ function M.open_floats(diagnostics, opts)
   end
 
   vim.api.nvim_buf_set_lines(bufnr, 0, -1, true, lines)
-
+  vim.api.nvim_buf_add_highlight(bufnr, 0, 'FloatTitle', 0, 0, -1)
   for i, diagnostic in ipairs(diagnostics) do
     vim.api.nvim_buf_add_highlight(
       bufnr,
       0,
       severities.highligts[diagnostic.severity],
-      i - 1,
+      i,
       0,
       -1
     )

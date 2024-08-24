@@ -12,7 +12,7 @@ function M.setup(config)
   local floats = {}
 
   vim.diagnostic.handlers['diag/notifier'] = {
-    show = function(_, _, diagnostics)
+    show = function(_, bufnr, diagnostics)
       if #diagnostics > config.limit then
         diagnostics = vim.list_slice(diagnostics, 1, config.limit)
       end
@@ -20,7 +20,7 @@ function M.setup(config)
         hl_group = config.hl_group,
         border = config.border,
       }
-      floats = window.open_floats(diagnostics, opts)
+      floats = window.open_floats(bufnr, diagnostics, opts)
     end,
     hide = function()
       pcall(window.close_floats, floats)
