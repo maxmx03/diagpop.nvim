@@ -3,7 +3,8 @@
 DiagFloat is a Neovim plugin that enhances your coding experience by
 displaying diagnostic messages in customizable floating windows
 
-![screenshot](https://github.com/user-attachments/assets/2b99e617-8000-4cee-bd5a-b4c5d1978e77)
+![2024-08-24 09-41-43](https://github.com/user-attachments/assets/00e8d137-e7ee-4648-93c4-81b8348ce54c)
+
 
 ## Installation
 
