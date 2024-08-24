@@ -54,12 +54,17 @@ function M.open_floats(current_buffer, diagnostics, opts)
 
   local buffername = vim.api.nvim_buf_get_name(current_buffer)
   local filename = get_filename(buffername)
-  table.insert(lines, ' ' .. filename .. ' ')
+
+  if not isempty(filename) then
+    table.insert(lines, ' ' .. filename .. ' ')
+  else
+    table.insert(lines, ' ' .. 'source not found' .. '')
+  end
 
   for _, diagnostic in ipairs(diagnostics) do
     local message = string.format(
       '%s - %s %s',
-      diagnostic.lnum,
+      diagnostic.lnum + 1,
       severities.icons[diagnostic.severity],
       diagnostic.message
     )
