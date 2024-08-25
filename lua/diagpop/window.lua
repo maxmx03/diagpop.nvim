@@ -58,7 +58,7 @@ function M.open_floats(current_buffer, diagnostics, opts)
   if not isempty(filename) then
     table.insert(lines, ' ' .. filename .. ' ')
   else
-    table.insert(lines, ' ' .. 'source not found' .. '')
+    return {}
   end
 
   for _, diagnostic in ipairs(diagnostics) do
