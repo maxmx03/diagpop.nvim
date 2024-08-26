@@ -40,10 +40,10 @@ function M.open_floats(current_buffer, diagnostics, opts)
       [vim.diagnostic.severity.INFO] = icons.Information,
     },
     highligts = {
-      [vim.diagnostic.severity.ERROR] = 'DiagnosticError',
-      [vim.diagnostic.severity.WARN] = 'DiagnosticWarn',
-      [vim.diagnostic.severity.HINT] = 'DiagnosticHint',
-      [vim.diagnostic.severity.INFO] = 'DiagnosticInfo',
+      [vim.diagnostic.severity.ERROR] = 'DiagnosticVirtualTextError',
+      [vim.diagnostic.severity.WARN] = 'DiagnosticVirtualTextWarn',
+      [vim.diagnostic.severity.HINT] = 'DiagnosticVirtualTextHint',
+      [vim.diagnostic.severity.INFO] = 'DiagnosticVirtualTextInfo',
     },
   }
 
