@@ -91,7 +91,7 @@ function M.open_floats(current_buffer, diagnostics, opts)
   local float_height = #lines
   local row = math.floor(vim.o.lines * 0.05)
   local col = screen_width - max_width - 2
-  local float_window = vim.api.nvim_open_win(bufnr, false, {
+  local config = {
     relative = 'editor',
     row = row,
     col = col,
@@ -101,7 +101,12 @@ function M.open_floats(current_buffer, diagnostics, opts)
     style = 'minimal',
     border = opts.border,
     noautocmd = true,
-  })
+  }
+  if opts.relative == 'cursor' then
+    config.relative = opts.relative
+    config.row = 0
+  end
+  local float_window = vim.api.nvim_open_win(bufnr, false, config)
   vim.api.nvim_set_option_value(
     'winhl',
     'Normal:' .. opts.hl_group,

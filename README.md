@@ -17,6 +17,7 @@ return {
     limit = 10,
     hl_group = 'NormalFloat',
     border = 'rounded',
+    relative = 'editor', -- editor | cursor
     dependencies = {
        'nvim-tree/nvim-web-devicons'
     }
