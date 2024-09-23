@@ -70,7 +70,7 @@ function M.open_floats(current_buffer, diagnostics, opts)
     )
     local limit = 45
     if #message > limit then message = message:sub(1, limit) end
-    table.insert(lines, '  ' .. message .. '  ')
+    table.insert(lines, '  ' .. message:gsub("\n", " ") .. '  ')
     max_width = math.max(max_width, #message + 4)
   end
 
