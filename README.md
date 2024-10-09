@@ -13,14 +13,32 @@ displaying diagnostic messages in customizable floating windows
 return {
   'maxmx03/diagpop.nvim',
   opts = {
-    -- default config
-    limit = 10,
-    hl_group = 'NormalFloat',
-    border = 'rounded',
-    relative = 'editor', -- editor | cursor
-    dependencies = {
-       'nvim-tree/nvim-web-devicons'
-    }
+    limit = 5,
+    hl_group = 'FloatBorder',
+    border = 'single', -- single, double, rounded, shadow, none
+    relative = 'editor', -- editor, cursor
+    -- filter
+    severity = nil, -- vim.diagnostic.severity.ERROR | WARN | INFO | HINT
   },
+  dependencies = {'nvim-tree/nvim-web-devicons'}
+}
+```
+
+[vim-plug](https://github.com/junegunn/vim-plug)
+
+```vim
+Plug 'maxmx03/diagpop.nvim'
+Plug 'nvim-tree/nvim-web-devicons'
+```
+
+```lua
+local diag = require 'diagpop'
+diag.setup {
+    limit = 5,
+    hl_group = 'FloatBorder',
+    border = 'single', -- single, double, rounded, shadow, none
+    relative = 'editor', -- editor, cursor
+    -- filter
+    severity = nil, -- vim.diagnostic.severity.ERROR | WARN | INFO | HINT
 }
 ```
